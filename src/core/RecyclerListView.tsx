@@ -107,6 +107,7 @@ export interface RecyclerListViewProps {
     optimizeForInsertDeleteAnimations?: boolean;
     style?: object|number;
     debugHandlers?: DebugHandlers;
+    getViewHolderForType?: (type: string | number) => JSX.Element | JSX.Element[];
 
     //For all props that need to be proxied to inner/external scrollview. Put them in an object and they'll be spread
     //and passed down. For better typescript support.
@@ -515,7 +516,8 @@ export default class RecyclerListView<P extends RecyclerListViewProps, S extends
                     height={itemRect.height}
                     width={itemRect.width}
                     itemAnimator={Default.value<ItemAnimator>(this.props.itemAnimator, this._defaultItemAnimator)}
-                    extendedState={this.props.extendedState} />
+                    extendedState={this.props.extendedState}
+                    getViewHolderForType={this.props.getViewHolderForType} />
             );
         }
         return null;
